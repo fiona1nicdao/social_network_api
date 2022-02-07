@@ -1,0 +1,27 @@
+{
+  "name": "social_network_api",
+  "version": "1.0.0",
+  "description": "week18",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiona1nicdao/social_network_api.git"
+  },
+  "author": "fiona1nicdao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiona1nicdao/social_network_api/issues"
+  },
+  "homepage": "https://github.com/fiona1nicdao/social_network_api#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
