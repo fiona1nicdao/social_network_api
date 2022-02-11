@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 // Schema for User 
-const userSchema = new Schema(
+const UserSchema = new Schema(
     {
         username:{
             type: String,
@@ -13,13 +13,13 @@ const userSchema = new Schema(
             type: String,
             require:true,
             unique:true,
-            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ ,'Please enter an email.']
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ ,'Please enter a valid email.']
             // check!! valid email (look into mongoose matching validation)
         },
         thoughts:[
             {
                 type:Schema.Types.ObjectId,
-                ref: 'thoughts',
+                ref: 'Thought',
             }
         ],
         friends:[
@@ -39,10 +39,10 @@ const userSchema = new Schema(
 )
 
 // initialize our User model
-const User = model('user', userSchema);
+const User = model('User', UserSchema);
 
 // create a virutal property 'friendCount'
-userSchema.virtual('friendCount').get(function(){
+UserSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 });
 
