@@ -9,7 +9,17 @@ const userSchema = new Schema(
             require:true,
             // trimemed
         },
-        email: {}
-        // finish here 
+        email: {
+            type: String,
+            require:true,
+            // unique
+            // valid email (look into mongoose matching validation)
+        },
+        thouhts:{
+            // array?
+        },
+        friends:{
+            // array
+        }
     }
 )
