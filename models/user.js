@@ -5,21 +5,45 @@ const userSchema = new Schema(
     {
         username:{
             type: String,
-            // unique
+            unique: true,
             require:true,
-            // trimemed
+            trim: true
         },
         email: {
             type: String,
             require:true,
-            // unique
-            // valid email (look into mongoose matching validation)
+            unique:true,
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ ,'Please enter an email.']
+            // check!! valid email (look into mongoose matching validation)
         },
-        thouhts:{
-            // array?
+        thoughts:[
+            {
+                type:Schema.Types.ObjectId,
+                ref: 'thoughts',
+            }
+        ],
+        friends:[
+            {
+                type:Schema.Types.ObjectId,
+                ref:'User',
+            }
+        ]
+    },
+    {
+        toJSON:{
+            virtuals:true,
+            getters:true,
         },
-        friends:{
-            // array
-        }
+        id:false
     }
 )
+
+// initialize our User model
+const User = model('user', userSchema);
+
+// create a virutal property 'friendCount'
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length;
+});
+
+module.exports = User;
