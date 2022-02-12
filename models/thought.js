@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose');
+const dateFormat = require('../utils/dateFormat')
+const ReactionSchema =require('./reaction')
 
 // Schema for Thought
 const ThoughtSchema = new Schema(
@@ -6,24 +8,20 @@ const ThoughtSchema = new Schema(
         thoughtText:{
             type: String,
             required: true,
-            minLength: [1, 'must have at least 1 character for text'],
-            maxLegnth: [280,'too many characters, only 280 characters allowed']
+            minlength: [1, 'must have at least 1 character for text'],
+            maxlegnth: [280,'too many characters, only 280 characters allowed']
         },
         createdAt:{
             type:Date,
             default:Date.now,
             // use a getter method to format the timestamp on query
+            get:(createDate) =>dateFormat(createDate)
         },
         username:{
             type: String,
             required: true
         },
-        reactions:[
-            {
-                type:Schema.Types.ObjectId,
-                ref:'Reaction'
-            }
-        ]
+        reactions:[ReactionSchema]
     },
     {
         toJSON:{

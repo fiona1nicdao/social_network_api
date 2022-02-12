@@ -1,16 +1,16 @@
-const {Schema, model} = require('mongoose');
+const {Schema, Types} = require('mongoose');
 
 // Schema for Reaction
 const ReactionSchema = new Schema(
     {
         reactionId:{
             type:Schema.Types.ObjectId,
-            // Default value is set to a new ObjectId
+            default: () => new Types.ObjectId()
         },
         reactionBody:{
             type:String,
             require:true,
-            maxLegnth: [280,'too many characters, only 280 characters allowed']
+            maxlegnth: [280,'too many characters, only 280 characters allowed']
         },
         username:{
             type:String,
@@ -20,6 +20,8 @@ const ReactionSchema = new Schema(
             type:Date,
             default:Date.now,
             // use a getter method to format the timestamp on query
+            get:(createDate) =>dateFormat(createDate)
+
         }
     },
     {

@@ -14,7 +14,6 @@ const UserSchema = new Schema(
             require:true,
             unique:true,
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ ,'Please enter a valid email.']
-            // check!! valid email (look into mongoose matching validation)
         },
         thoughts:[
             {
