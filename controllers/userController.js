@@ -4,9 +4,7 @@ module.exports = {
     // get all users
     getAllUsers(req, res) {
         User.find()
-            .then(async (users)=>{const userObj = {users}
-                return res.json(userObj);
-            })
+            .then((users)=> res.json(users))
             .catch((err) => {
                 console.log(err);
                 res.status(500).json(err)
