@@ -32,7 +32,7 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id:req.params.thoughtId},
             {$set: req.body},
-            // DO i need this? {runValidators:true, new:true}
+            {runValidators:true, new:true}
         )
         .then((thought)=>
             !thought
@@ -62,7 +62,7 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id:req.params.thoughtId},
             {$addToSet:{reactions:req.body}},
-            // DO i need this? {runValidators:true, new:true}
+            {runValidators:true, new:true}
         )
         .then((thought)=>
             !thought
@@ -79,8 +79,8 @@ module.exports = {
     removeReaction(req,res){
         Thought.findOneAndUpdate(
             { _id:req.params.thoughtId},
-            {$pull:{reaction:{reactionId:req.params.reactionId}}}
-            // DO i need this? {runValidators:true, new:true}
+            {$pull:{reaction:{reactionId:req.params.reactionId}}},
+            {runValidators:true, new:true}
         )
         .then((thought)=>
             !thought

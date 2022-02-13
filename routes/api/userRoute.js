@@ -14,14 +14,17 @@ const{
 router.route('/')
     .get(getAllUsers)
     .post(createUser);
+
 // endpoint: /api/users/:userId
 router.route('/:userId')
     .get(getSingleUser)
     .put(updateUser)
     .delete(deleteUser);
-// endpoint: /api/users/:userId/friend
+
+// endpoint: /api/users/:userId/friend/:friendId
 router.route('/:userId/friend/:friendId')
-    .get(addFriend);
+    .post(addFriend);
+
 // endpoint: /api/users/:userId/friend/:friendId
 router.route('/:userId/friend/:friendId')
     .delete(removeFriend);

@@ -20,8 +20,7 @@ const ReactionSchema = new Schema(
             type:Date,
             default:Date.now,
             // use a getter method to format the timestamp on query
-            get:(createDate) =>dateFormat(createDate)
-
+            get:(createDate) => Intl.DateTimeFormat('en-US').format(createDate)
         }
     },
     {

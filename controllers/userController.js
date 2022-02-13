@@ -71,30 +71,39 @@ module.exports = {
             })
     },
     // add a friend to a user
-    // need to fix b/c need 2 users !! 
-    addFriend(req,res){
-        console.log('You are adding a friend');
-        console.log(req.body);
+    addFriend({params},res){
         User.findOneAndUpdate(
-            {_id:req.params.userId},
-            {$addToSet: {friends:req.body}},
+            // friendId add to userId friends 
+            {_id:params.userId},
+            {$addToSet: {friends:params.friendId}},
             {runValidators:true, new:true}
         )
-        .then((user)=>
+        .then((user)=>{
             !user
+            ? res
+                .status(404)
+                .json({message:'No user found with that ID'})
+            : res.json(user);
+            User.findOneAndUpdate(
+                // userId add to friendId friends
+                {_id:params.friendId},
+                {$addToSet: {friends:params.friendId}},
+                {runValidators:true, new:true}
+            )
+            .then((user2)=>{
+                !user2
                 ? res
                     .status(404)
                     .json({message:'No user found with that ID'})
-                : res.json(user)
-        )
+                : console.log("added friend")
+            })
+        })
         .catch((err)=> {
             console.log(err)
             res.status(500).json(err);
         })
     },
-    // remove friend from a user 
-        // need to fix b/c need 2 users !! 
-
+    // remove friend from a user
     removeFriend(req,res){
         User.findOneAndUpdate(
             {_id: req.params.userId},
