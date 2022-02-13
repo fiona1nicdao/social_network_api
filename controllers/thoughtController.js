@@ -19,13 +19,25 @@ module.exports = {
             .catch((err)=> res.status(500).json(err));
     },
     // create a new Thought
-    createThought(req,res){
-        Thought.create(req.body)
-            .then((thought)=>res.json(thought))
+    createThought({body},res){
+        Thought.create(body)
+            .then((thought)=>{
+                User.findOneAndUpdate(
+                    { _id:body.userId},
+                    {$push:{thoughts:thought._id}},
+                    {new:true}
+                )
+                .then((user)=>
+                !user
+                    ? res.status(404).json({message:"No user with this id"})
+                    : res.json(user)
+                )
+                .catch(err => res.json(err));
+            })
             .catch((err)=>{
                 console.log(err);
-                return res.status(500).json(err);
-            });
+                return res.status(500).json(err)
+            })
     },
     // update a thought
     updateThought(req,res){

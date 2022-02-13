@@ -3,8 +3,10 @@ const {User, Thought} = require('../models');
 module.exports = {
     // get all users
     getAllUsers(req, res) {
-        User.find()
-            .then((users)=> res.json(users))
+        User.find({})
+            .populate({path:'thoughts',select:'-__v'})
+            .select('-__v')
+            .then(user=> res.json(user))
             .catch((err) => {
                 console.log(err);
                 res.status(500).json(err)
@@ -13,9 +15,9 @@ module.exports = {
     // get a single user
     getSingleUser(req,res){
         User.findOne({ _id:req.params.userId })
-        // what does this do?
+        .populate({path:'thoughts',select:'-__v'})
         .select('-__v')
-        .then(async (user)=>
+        .then((user)=>
             !user
                 ? res.status(404).json({message:"No User with that ID"})
                 : res.json({user})
