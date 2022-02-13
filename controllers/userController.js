@@ -10,7 +10,7 @@ module.exports = {
                 res.status(500).json(err)
             })
     },
-    // get a single student 
+    // get a single user
     getSingleUser(req,res){
         User.findOne({ _id:req.params.userId })
         // what does this do?
