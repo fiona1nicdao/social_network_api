@@ -20,7 +20,7 @@ router.route('/:userId')
     .put(updateUser)
     .delete(deleteUser);
 // endpoint: /api/users/:userId/friend
-router.route('/:userId/friend')
+router.route('/:userId/friend/:friendId')
     .get(addFriend);
 // endpoint: /api/users/:userId/friend/:friendId
 router.route('/:userId/friend/:friendId')
