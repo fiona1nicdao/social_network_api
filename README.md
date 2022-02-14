@@ -15,6 +15,9 @@ npm start
 ```
 Then in insomnia or postman put localhost:3005 in your endpoint and follow the code in the route folder to send certain endpoint to display specific data.
 
+## Walkthrough Video
+Here is the link to the walkthrough video: 
+
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
